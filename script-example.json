@@ -1,0 +1,22 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "...",
+      "secret_key": "...",
+      "region": "us-west-2",
+      "source_ami": "ami-07d3bf68ab01dca97",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "packer {{timestamp}}"
+    }
+  "ami_users": ["eks_spinnaker"]
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "command": "ping -c 5 www.google.com"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+    "builders": [{
+        "type": "amazon-ebs",
+        "access_key": "",
+        "secret_key": "",
+        "region": "us-east-1",
+        "source_ami": "ami-de0d9eb7",
+        "instance_type": "m1.large",
+        "ssh_username": "ubuntu",
+        "ami_name": "packer-jenkins {{.CreateTime}}"
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "inline": [
+            "sudo apt-get install -y openjdk-7-jdk",
+            "wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -",
+            "sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'",
+            "sudo apt-get update",
+            "sudo apt-get install -y jenkins"
+        ]
+    }]
+}
+
